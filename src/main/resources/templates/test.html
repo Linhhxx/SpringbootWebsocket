@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <script th:src="@{/js/jquery.min.js}"></script>
+    <script th:src="@{/js/socket.io.js}"></script>
+</head>
+<body>
+
+    <form>
+        <h2>登录</h2>
+        project号：<input type="text" id="projectId"><p>
+        用户号：<input type="text" id="userId"><p>
+        <input type="button" value="登录" id="loginbutton"/>
+        <hr>
+        <p>
+        <p>
+        <p>
+        <h2>消息发送</h2>
+        用户号：<input type="text" id="userMsgId"><p>
+        project号：<input type="text" id="projectMsgId"><p>
+        消息内容：<input type="text" id="msg"/>
+        <input type="button" id="sendMsg" value="发送"/>
+        <hr>
+        <p>
+        <p>
+        <p>
+        <h2>消息回显</h2>
+        <span id="receMsg"></span>
+    </form>
+
+    <script>
+        //创建socket
+        var socket = io('http://localhost:9092');//用于连接后端的服务
+
+        $("#loginbutton").click(function () {
+            var project = $('#projectId').val();
+            var user = $('#userId').val();
+            socket.emit('login', {projectId:project,userId:user});      //发送一个login请求，后端使用@OnEvent(value = "login")进行接收
+        })
+
+        $("#sendMsg").click(function () {
+            var userMsgId = $('#userMsgId').val();
+            var projectMsgId = $('#projectMsgId').val();
+            var msgcontent = $("#msg").val();
+            socket.send({projectId:projectMsgId,toUserId:userMsgId,msg:msgcontent});    //发送请求，后端使用@OnEvent("message")接收
+        })
+
+        socket.on('message', function (data) {
+            //输出服务端响应了数据
+            $("#receMsg").text(data);
+        });
+
+    </script>
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,17 @@
+2020-04-30 15:39:50.575  INFO 9980 --- [main] c.e.SpringbootwebsocketApplication       : Starting SpringbootwebsocketApplication on AFODC-611262228 with PID 9980 (E:\JavaWebIDE\SpringbootWebsocket\target\classes started by lin22 in E:\JavaWebIDE\SpringbootWebsocket)
+2020-04-30 15:39:50.579  INFO 9980 --- [main] c.e.SpringbootwebsocketApplication       : No active profile set, falling back to default profiles: default
+2020-04-30 15:39:51.665  INFO 9980 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'nettySocketConfig' of type [com.example.config.NettySocketConfig$$EnhancerBySpringCGLIB$$ffa4bb96] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-04-30 15:39:51.733  INFO 9980 --- [main] trationDelegate$BeanPostProcessorChecker : Bean 'socketIOServer' of type [com.corundumstudio.socketio.SocketIOServer] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2020-04-30 15:39:52.522  INFO 9980 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2020-04-30 15:39:52.537  INFO 9980 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2020-04-30 15:39:52.538  INFO 9980 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.33]
+2020-04-30 15:39:52.661  INFO 9980 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2020-04-30 15:39:52.661  INFO 9980 --- [main] o.s.web.context.ContextLoader            : Root WebApplicationContext: initialization completed in 1978 ms
+2020-04-30 15:39:52.718  INFO 9980 --- [main] c.c.s.a.SpringAnnotationScanner          : socketIoServer bean listeners added
+2020-04-30 15:39:52.881  INFO 9980 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2020-04-30 15:39:53.110  INFO 9980 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2020-04-30 15:39:53.113  INFO 9980 --- [main] c.e.SpringbootwebsocketApplication       : Started SpringbootwebsocketApplication in 3.192 seconds (JVM running for 4.735)
+2020-04-30 15:39:53.114  INFO 9980 --- [main] c.c.socketio.SocketIOServer              : Session store / pubsub factory used: MemoryStoreFactory (local session store only)
+2020-04-30 15:39:53.603  INFO 9980 --- [main] com.example.compent.ServerRunner         : socket.io启动
+2020-04-30 15:39:53.603  INFO 9980 --- [nioEventLoopGroup-2-1] c.c.socketio.SocketIOServer              : SocketIO server started at port: 9092
+2020-04-30 15:52:31.990  INFO 9980 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
