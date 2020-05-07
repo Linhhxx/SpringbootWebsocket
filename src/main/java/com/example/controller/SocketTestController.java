@@ -17,4 +17,9 @@ public class SocketTestController {
     public String socket(){
         return "test";
     }
+
+    @RequestMapping("/socketB")
+    public String socketB(){
+        return "testb";
+    }
 }

@@ -22,6 +22,9 @@ public class NettySocketConfig {
         config.setPort(9092);
         config.setMaxFramePayloadLength(1024 * 1024);
         config.setMaxHttpContentLength(1024 * 1024);
+        config.setAllowCustomRequests(true);
+        config.setBossThreads(1);
+        config.setWorkerThreads(100);
         final SocketIOServer server = new SocketIOServer(config);
         return server;
     }

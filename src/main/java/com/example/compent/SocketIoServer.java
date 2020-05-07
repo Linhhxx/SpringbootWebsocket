@@ -1,22 +1,16 @@
 package com.example.compent;
 
-import com.alibaba.fastjson.JSONObject;
 import com.corundumstudio.socketio.AckRequest;
-import com.corundumstudio.socketio.HandshakeData;
 import com.corundumstudio.socketio.SocketIOClient;
 import com.corundumstudio.socketio.SocketIOServer;
 import com.corundumstudio.socketio.annotation.OnConnect;
 import com.corundumstudio.socketio.annotation.OnDisconnect;
 import com.corundumstudio.socketio.annotation.OnEvent;
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import javax.websocket.OnMessage;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.*;
 
@@ -58,6 +52,9 @@ public class SocketIoServer {
         onlineUsers.put(client.getSessionId(),map);
         clients.put(client.getSessionId(),client);
         log.info(data.get("userId")+"已经登录");
+
+        //将登陆的用户统一加入到了一个房间中
+        client.joinRoom("roomOne");
     }
 
     @OnDisconnect       //用户监听客户端断开信息的。
@@ -65,6 +62,8 @@ public class SocketIoServer {
         if(onlineUsers.containsKey(client.getSessionId())){
             log.info("失去连接**********************");
             onlineUsers.remove(client.getSessionId());
+            //该用户离开该房间
+            client.leaveRoom("roomOne");
         }
     }
 
@@ -78,6 +77,14 @@ public class SocketIoServer {
             }
         }
     }
+
+    //群发
+    @OnEvent("sendAllMessage")
+    public void sendAllMessage(SocketIOClient client, String msg){
+        socketIOServer.getRoomOperations("roomOne").sendEvent("receiveAllMessage",msg);
+        log.info("进行群发消息");
+    }
+
 
 
 

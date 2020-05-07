@@ -22,12 +22,21 @@
         project号：<input type="text" id="projectMsgId"><p>
         消息内容：<input type="text" id="msg"/>
         <input type="button" id="sendMsg" value="发送"/>
-        <hr>
         <p>
         <p>
         <p>
         <h2>消息回显</h2>
         <span id="receMsg"></span>
+        <hr>
+        <p>
+        <p>
+        <p>
+        <h2>群发消息</h2>
+        消息内容：<input type="text" id="allMsg"/>
+        <input type="button" id="sendAllMsg" value="群发"/>
+        <p>群发消息回显:
+        <span id="receAllMsg"></span>
+
     </form>
 
     <script>
@@ -38,8 +47,10 @@
             var project = $('#projectId').val();
             var user = $('#userId').val();
             socket.emit('login', {projectId:project,userId:user});      //发送一个login请求，后端使用@OnEvent(value = "login")进行接收
+            console.log(socket.id)
         })
 
+        /*消息发送*/
         $("#sendMsg").click(function () {
             var userMsgId = $('#userMsgId').val();
             var projectMsgId = $('#projectMsgId').val();
@@ -47,9 +58,22 @@
             socket.send({projectId:projectMsgId,toUserId:userMsgId,msg:msgcontent});    //发送请求，后端使用@OnEvent("message")接收
         })
 
+        /*群发*/
+        $("#sendAllMsg").click(function () {
+            var msgcontent = $("#allMsg").val();
+            socket.emit("sendAllMessage",msgcontent);
+        })
+
+
+
         socket.on('message', function (data) {
             //输出服务端响应了数据
             $("#receMsg").text(data);
+        });
+
+        socket.on('receiveAllMessage', function (data) {
+            //输出服务端响应了数据
+            $("#receAllMsg").text(data);
         });
 
     </script>
